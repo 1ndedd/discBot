@@ -1,12 +1,19 @@
-const discord = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 
-const clientListener = new discord.Client();
+const { token } = require('./config.json') ;
 
-clientListener.on("message", messsage=>{
+const discClient = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+
+discClient.on(Events.ClientReady, c=> {
+    console.log(`Ready! Logged in as ${c.user.tag}`);
+});
+
+discClient.on("message", messsage=>{
     if(message.content == "hello"){
         message.content.send("Hello Hensem!");
     }
 });
 
 //start up the client bot
-clientListener.login(token);
+discClient.login(token);
